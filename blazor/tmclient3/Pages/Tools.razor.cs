@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Iot.Device.CharacterLcd;
+using System;
 using System.Collections.Generic;
 using System.Device.Gpio;
 using System.Linq;
@@ -25,6 +26,54 @@ namespace blazor.Pages
             catch(Exception ex)
             {
                 throw new Exception("Error toogling buzzer!", ex);
+            }
+        }
+
+        void writeHW()
+        {
+            try
+            {
+                Console.WriteLine("Going to write a hello world to lcd...");
+                using (var lcd = new Lcd1602(4, 17, new int[] { 24, 23, 22, 18 }))
+                {
+                    //using var lcd = new Lcd1602(7, 11, new int[] { 18, 16, 15, 12 });
+                    lcd.Clear();
+                    lcd.Write("Hello World");
+                    Console.WriteLine("Done!");
+                }
+            }
+            catch (System.NotSupportedException ex)
+            {
+                Console.WriteLine("Would write 'Hello World' to lcd!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error writing to lcd!");
+                throw new Exception("Error writing to lcd!", ex);
+            }
+        }
+
+        void writeHW2()
+        {
+            try
+            {
+                Console.WriteLine("Going to write a hello world to lcd type2...");
+                using (var lcd = new Lcd1602(7, 11, new int[] { 18, 16, 15, 12 }))
+                {
+                    //using var lcd = new Lcd1602(7, 11, new int[] { 18, 16, 15, 12 });
+                    lcd.Clear();
+                    lcd.Write("Hello World");
+                    Console.WriteLine("Done!");
+                }
+            }
+            catch (System.NotSupportedException ex)
+            {
+                Console.WriteLine("Would write 'Hello World' to lcd!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error writing to lcd!");
+                throw new Exception("Error writing to lcd!", ex);
             }
         }
     }
